@@ -8,9 +8,10 @@ public class TrappingRainWater {
 	public static void main(String[] args) {
 		int[] arr= {0, 1, 0, 2};
 		int totalVolumeOfWater=volume(arr);
-		System.out.println(totalVolumeOfWater);
+		//System.out.println(totalVolumeOfWater);
 		int[] arr1= {4, 2, 0, 3,2,5};
 		int totalVolumeOfWater1=volume(arr1);
+		System.out.println(totalVolumeOfWater1);
 
 	}
 	//note:- here time complexity is O(n) & space complexity is O(2N);
@@ -33,7 +34,7 @@ public class TrappingRainWater {
 		for(int i=1;i<arr.length-1;i++) {
 			int len=Math.min(lb[i], rb[i]);
 			totalVolume=totalVolume+(len-arr[i]);
-			System.out.println("i="+i+" lb[i]="+lb[i]+" rb[i]="+rb[i]+" len(max)="+len+" currentVolume="+totalVolume);
+			//System.out.println("i="+i+" lb[i]="+lb[i]+" rb[i]="+rb[i]+" len(max)="+len+" currentVolume="+totalVolume);
 		}
 //		System.out.println(Arrays.toString(lb));
 //		System.out.println(Arrays.toString(arr));
