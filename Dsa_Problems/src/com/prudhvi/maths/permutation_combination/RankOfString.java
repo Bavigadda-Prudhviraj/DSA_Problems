@@ -1,4 +1,4 @@
-package com.prudhvi.Arrays.permutation_combination;
+package com.prudhvi.maths.permutation_combination;
 
 import java.util.*;
 

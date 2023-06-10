@@ -1,1 +1,0 @@
-package com.prudhvi.Arrays.prime_numbers;
