@@ -22,7 +22,7 @@ import java.util.*;
     	   (79-104)CA-CZ
  */
 
-public class ExcelSheet {
+public class ExcelSheetNumToString {
 
 	public static void main(String[] args) {
 
