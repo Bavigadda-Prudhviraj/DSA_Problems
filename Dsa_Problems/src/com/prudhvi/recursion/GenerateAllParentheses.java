@@ -26,7 +26,7 @@ import java.util.*;
 			Time complexity:(Total number of recursive calls)*(Time Complexity of one function call except for the recursive part)
 								2^n*1=O(2^n)
 			Space Complexity: Max size of Stack at any point of execution
-							    n=O(n)
+							    n=O(n).
  */
 
 public class GenerateAllParentheses {
