@@ -22,6 +22,11 @@ import java.util.*;
 						5.If close_count is greater than open_count, call generateParentheses recursively with current + ')', open_count, and close_count - 1.
 						6.Implement the main function, let's call it generateParenthesis, which initializes the list of valid combinations and calls generateParentheses with an empty string, the given number of opening parentheses, and the same number of closing parentheses.
 						7.Return the list of valid combinations
+						
+			Time complexity:(Total number of recursive calls)*(Time Complexity of one function call except for the recursive part)
+								2^n*1=O(2^n)
+			Space Complexity: Max size of Stack at any point of execution
+							    n=O(n)
  */
 
 public class GenerateAllParentheses {
@@ -47,7 +52,7 @@ public class GenerateAllParentheses {
 	        	generateparentheses(A, openingParenthesis+1, closingParenthesis, str+"(",arr);
 	        	
 	        }
-	        ////closing parenthesis always should be less then opening, if we write ==opening parenthesis,")" at this point again it enter into if condition and makes current string as ")(" it is wrong because open always closing parentheses less then opening parentheses;
+	        //closing parenthesis always should be less then opening, if we write ==opening parenthesis,")" at this point again it enter into if condition and makes current string as ")(" it is wrong because open always closing parentheses less then opening parentheses;
 	        if(closingParenthesis<openingParenthesis) {
 	        	generateparentheses(A, openingParenthesis, closingParenthesis+1, str+")",arr);
 	        }
