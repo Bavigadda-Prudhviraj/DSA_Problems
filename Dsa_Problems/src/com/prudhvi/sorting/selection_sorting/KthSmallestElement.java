@@ -25,6 +25,7 @@ public class KthSmallestElement {
 		System.out.println(sort[kthElement-1]);
 	}
 	public static int[] SelectionSorting(int[] arr,int b){
+		//we are running the loop less than b because by b-1 index up to b index array will be sorted so we can directly return b-i index
         for(int i=0;i<b;i++){
             int minValues=arr[i];
             int minIndex=i;
