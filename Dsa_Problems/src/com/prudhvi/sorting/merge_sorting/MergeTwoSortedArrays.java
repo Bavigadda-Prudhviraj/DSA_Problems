@@ -23,7 +23,7 @@ public class MergeTwoSortedArrays {
 				what if pointer 1 reaches the end of the array first?
 				What if pointer 2 reaches the end of the array first?
 
-				If pointer 1 reaches the end we can just keep on putting the elements from B
+				If pointer 1 reaches the end we can just keep on putting the elements from B.
 				in the result array while the pointer 2 does not reach the end.
 				The same process goes for if pointer 2 reaches the end.
 	  
