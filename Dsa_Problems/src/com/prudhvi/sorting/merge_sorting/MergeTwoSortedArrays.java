@@ -35,9 +35,10 @@ public class MergeTwoSortedArrays {
 	  	int n=A.length;
 		int m=B.length;
 		int[] ansArr=new int[m+n];
-		int p1=0;
-		int p2=0;
-		int i=0;
+		int p1=0; // Pointer for arr1
+		int p2=0; // Pointer for arr2
+		int i=0;  // Pointer for result
+		// Compare elements from arr1 and arr2 and add the smaller element to the result array
 		while (p1<n && p2<m){
 			if(A[p1]<=B[p2]) {
 				ansArr[i]=A[p1];
@@ -53,11 +54,13 @@ public class MergeTwoSortedArrays {
 			
 			
 		}
+		 // Copy any remaining elements from arr1 (if any)
 		while(p1<n) {
 			ansArr[i]=A[p1];
 			p1++;
 			i++;	
 		}
+		// Copy any remaining elements from arr2 (if any)
 		while(p2<m) {
 			ansArr[i]=B[p2];
 			p2++;
