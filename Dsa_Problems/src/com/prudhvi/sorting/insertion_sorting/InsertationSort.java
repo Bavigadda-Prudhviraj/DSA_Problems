@@ -8,6 +8,9 @@ public class InsertationSort {
 	 Initially, the sorted sub array contains only the first element of the input array, and the unsorted sub array contains the remaining elements. 
 	 The algorithm then iterates through the unsorted sub array, selecting one element at a time and inserting it into the correct position within the sorted sub array
 	 
+	 Time complexity : Worst case: O(n^2)
+	 				   Best case:  O(n) when array is given in sorted order
+	 Space complexity: O(1) because it is in place sorting 
 	 * */
 
 	public static void main(String[] args) {
