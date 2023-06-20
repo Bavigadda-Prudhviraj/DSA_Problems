@@ -26,7 +26,7 @@ public class PlaceFirstvalueAtIndexSCOne {
 			if(arr[p1]<=arr[0]) {
 				p1++;
 			}
-			if(arr[p2]>arr[0]) {
+			else if(arr[p2]>arr[0]) {
 				p2--;
 			}
 			//we faced an element which is array[p1] greater then array[0], this is unhappy element
