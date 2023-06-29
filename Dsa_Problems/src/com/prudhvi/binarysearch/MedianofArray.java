@@ -155,8 +155,8 @@ Search in [imin, imax]:
 	 */
 
 	public static void main(String[] args) {
-		ArrayList<Integer> arr1 =new ArrayList<>(Arrays.asList(-35 ,5 ,11, 34 ,35));
-		ArrayList<Integer> arr2=new ArrayList<>(Arrays.asList()); //expected 10.0
+		ArrayList<Integer> arr1 =new ArrayList<>(Arrays.asList(1,3));
+		ArrayList<Integer> arr2=new ArrayList<>(Arrays.asList(2)); //expected 10.0
 		double ans=medianOfTwoSortedArrays(arr1,arr2);
 		System.out.println(ans);
 		double ans1=findMedianSortedArrays(arr1,arr2);
