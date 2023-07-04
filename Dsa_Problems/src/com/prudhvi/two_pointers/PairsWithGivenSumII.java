@@ -1,6 +1,17 @@
 package com.prudhvi.two_pointers;
 
 public class PairsWithGivenSumII {
+	/*
+	Problem Description
+		Given a sorted array of integers (not necessarily distinct) A and an integer B, find and return how many pair of integers ( A[i], A[j] ) such that i != j have sum equal to B.
+		Since the number of such pairs can be very large, return number of such pairs modulo (109 + 7).
+		Return the number of pairs for which sum is equal to B modulo (10^9+7).
+
+	Problem Constraints
+		1 <= |A| <= 100000
+		1 <= A[i] <= 10^9
+		1 <= B <= 10^9
+	 */
 
 	public static void main(String[] args) {
 		int[] A = {1,2,6,6,7,9,9};
