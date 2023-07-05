@@ -1,6 +1,6 @@
 package com.prudhvi.Bit_manuplation;
 
-import java.util.Iterator;
+
 
 public class EveryElementAppearsThriceExceptOne {
 	/*
