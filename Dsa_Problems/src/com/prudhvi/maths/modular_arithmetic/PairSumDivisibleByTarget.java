@@ -30,8 +30,8 @@ public class PairSumDivisibleByTarget {
 			HashMap operations, such as get, put, and getOrDefault, have an average time complexity of O(1).
 			
 	Space Complexity:
-		The space complexity of the code is O(target), as it uses a HashMap (remainders) to store the frequencies of remainders. 
-		The size of the HashMap can be at most target, depending on the number of distinct remainders in the array.
+			The space complexity of the code is O(minimum(arr.length,target), as it uses a HashMap (remainders) to store the frequencies of remainders. 
+			The size of the HashMap can be at most target, depending on the number of distinct remainders in the array.
 	 */
 
 	private static int  pairsCountpairSumDivisibleByTarget(int[] arr, int target) {
