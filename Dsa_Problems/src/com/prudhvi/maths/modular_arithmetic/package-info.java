@@ -60,7 +60,31 @@ package com.prudhvi.maths.modular_arithmetic;
 
 
 
+Multiplicative Inverse Modulo:
+	Let us see some of the methods to the proof modular multiplicative inverse.
+		Method 1: 
+			For the given two integers, say ‘a’ and ‘m’, find the modular multiplicative inverse of ‘a’ under modulo ‘m’.
+			The modular multiplicative inverse of an integer ‘x’ such that.
+				ax ≡ 1 ( mod m )
+			The value of x should be in the range of {0, 1, 2, … m-1}, i.e., it should be in the ring of integer modulo m.
+			Note: That the modular reciprocal exists, that is, “a modulo m” if and only if a and m are relatively prime.
+				 gcd(a, m) = 1.
 
+		Method 2: 
+			If a and m are coprime, multiplicative inverse modulo can also be found using the Extended Euclidean Algorithm
+			1.From the Extended Euclidean algorithm that takes two integers to say ‘a’ and ‘b’, finds their gcd and also finds ‘x’ and ‘y’ such that
+			   ax + by = gcd(a, b)
+			2.To find the reciprocal of ‘a’ under ‘m’, substitute b = m in the above formula. 
+			  We know that if a and m are relatively prime, the value of gcd is taken as 1.
+			  ax + my = 1
+			3.Take modulo m on both sides, and we get
+			  ax + my = 1(mod m)
+			4.We can remove the second term on the left side as ‘my (mod m)’ because, for an integer, y will be 0. So it becomes,
+			  ax ≡ 1 (mod m)
+			So, the value of x can be found using the extended Euclidean algorithm, which is the multiplicative inverse of a.
+			It is mostly used in equations for simplifications. Mostly it is used for cancellation of the terms. 
+			Remember that if you want to find the multiplicative inverse of a number, then take the reciprocal of a number.
+			Multiplicative Inverse of C
 
 
 
