@@ -45,7 +45,43 @@ public class ArrToLL {
 			}
 		}
 		return length;
-		
+	}
+	public static ListNode  deleteKthElementFromEnd(ListNode head,int target) {
+		int length=0;
+		if(head==null) 
+			return head;
+		ListNode headNode=head;
+		while (headNode!=null) {
+			headNode=headNode.next;	
+			length++;
+		}
+		if(length<target) {
+			System.out.println(" Index Out Of Bounds ");
+			return null;
+		}
+		int deletingIndex=length-target;
+		if(deletingIndex==0) {
+			headNode=head.next;
+			return headNode;
+		}
+		int count=1;
+		headNode=head;
+		while (count<deletingIndex){
+			headNode=headNode.next;
+			count++;
+		}
+		ListNode tempNode=headNode.next.next;
+		headNode.next=tempNode;
+		return head;
+	}
+	public static boolean searchForTarget(ListNode head,int target){
+		while(head!=null){
+			if(head.value==target) {
+				return true;
+			}
+			head=head.next;
+		}
+		return false;
 	}
 
 }

@@ -118,7 +118,18 @@ public class ListNode {
 			}
 		}
 		return head;
-		
+	}
+	public static ListNode convertArrtoLinkedList(int[] arr) {
+		if(arr.length==0) {
+			return null;
+		}
+		ListNode headNode= new ListNode(arr[0]);
+		ListNode tempNode=headNode;
+		for(int i=1;i<arr.length;i++) {
+			tempNode.next=new ListNode(arr[i]);
+			tempNode=tempNode.next;
+		}
+		return headNode;
 	}
 }
 
