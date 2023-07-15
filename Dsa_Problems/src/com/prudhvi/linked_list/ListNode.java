@@ -32,7 +32,7 @@ public class ListNode {
 		tempNode.next=newNode;	
 		return true;
 	}
-	private static void printLinkedList(ListNode head){
+	public static void printLinkedList(ListNode head){
 		if(head==null) {
 			System.out.println("empty linked list");
 		}
@@ -130,6 +130,19 @@ public class ListNode {
 			tempNode=tempNode.next;
 		}
 		return headNode;
+	}
+	public static ListNode reverseLinkedList(ListNode head) {
+		ListNode previousNode=null;
+		ListNode currentNode=head;
+		ListNode nextNode;
+		while (currentNode!=null){
+			nextNode=currentNode.next;
+			currentNode.next=previousNode;
+			previousNode=currentNode;
+			currentNode=nextNode;
+		}
+		return previousNode;
+		
 	}
 }
 
