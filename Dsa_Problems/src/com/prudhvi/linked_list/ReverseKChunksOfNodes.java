@@ -1,11 +1,11 @@
 package com.prudhvi.linked_list;
 
-public class ReverseLinkList {
+public class ReverseKChunksOfNodes {
 
 	public static void main(String[] args) {
 		int[] arr= {1,2,3,4,5,6,7,8,9};
 		ListNode head=ArrToLL.createLinkedListFromArray(arr);
-		ListNode revesedLL=reverseLinkedList(head);
+		ListNode revesedLL=reveseHead(head);
 		ArrToLL.printLinkedList(revesedLL);
 
 	}
@@ -54,6 +54,20 @@ public class ReverseLinkList {
 	        node = temp;
 	    }
 	    return prev;
+	}
+	public static ListNode reveseHead(ListNode head){
+		ListNode dataNode=head;
+		ListNode tempNode=head;
+		ListNode endNode=null;
+		while(dataNode!=null){
+			tempNode=dataNode;
+			dataNode=dataNode.next;
+			tempNode.next=null; //this line is not needed
+			tempNode.next=endNode;
+			endNode=tempNode;
+		}
+		return  tempNode;
+		
 	}
 
 }
