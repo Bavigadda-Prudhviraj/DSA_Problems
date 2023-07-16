@@ -10,22 +10,45 @@ public class RemoveDuplicatesfromSortedList {
 	}
 	public static ListNode removeDuplicates(ListNode head) {
 		ListNode temp1=head;
-		ListNode temp2=head.next;
+		ListNode temp2=head;
 		while(temp2.next!=null){
-			if(temp1.value==temp2.value) {
-				int i=1;
+			if(temp1.value==temp2.next.value) {
 				int val=temp1.value;
+				int i=1;
 				while(val==temp2.next.value){
-					temp2=temp2.next;	
+					if(temp2.next!=null) {
+						temp2=temp2.next;	
+						System.out.println("i: "+i);
+						i++;
+						
+					}
+					
 				}
-				//System.out.println("i "+i+" temp1:"+temp1.value+" temp2:"+temp2.value);
+				
+				
+				
 			}
-			if(temp2==null) {
+			if(temp2.next!=null) {
+				temp1.next=temp2.next;
+				
+			}
+			else if(temp2.next==null) {
+				System.out.println("666666666666666666666");
+				temp1.next=temp2;
+				return head;
+			}
+			//System.out.println(temp1.value+" "+temp2.value);
+			
+			System.out.println("after temp1:"+temp1.value+" temp2:"+temp2.value);
+			temp1=temp2;
+			if(temp2.next==null) {
+				temp1=temp2;
 				break;
 			}
-			System.out.println("after temp1:"+temp1.value+" temp2:"+temp2.value);
 			temp1=temp1.next;
 			temp2=temp2.next;
+			head.printLinkedList(head);
+			//temp2=temp2.next;
 			}
 		return head;
 			
