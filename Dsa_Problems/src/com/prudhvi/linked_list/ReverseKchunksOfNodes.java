@@ -1,6 +1,25 @@
 package com.prudhvi.linked_list;
 
-public class ReversefirstKelementsLinkedList {
+public class ReverseKchunksOfNodes {
+	/*
+	Problem Description
+	Given a singly linked list A and an integer B, reverse the nodes of the list B at a time and return the modified linked list.
+
+
+	Problem Constraints
+		1 <= |A| <= 103
+		B always divides A
+	
+	Input
+		A = [1, 2, 3, 4, 5, 6]
+ 		B = 2
+ 	output
+ 		For the first example, the list can be reversed in groups of 2.
+    		[[1, 2], [3, 4], [5, 6]]
+ 		After reversing the K-linked list
+    		[[2, 1], [4, 3], [6, 5]]
+ 	
+	 */
 
 	public static void main(String[] args) {
 		int[] arr= {6,10,0,3,4,8};
