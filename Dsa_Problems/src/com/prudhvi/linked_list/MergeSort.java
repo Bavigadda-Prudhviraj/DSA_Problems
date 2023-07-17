@@ -35,21 +35,30 @@ public class MergeSort {
 			In the best case scenario, the space complexity is O(1) if the linked list is already sorted.
 	 */
 	public static ListNode mergeSort(ListNode head){
+		//Check if head is null. If true, return head as there is nothing to sort.
 		if(head==null) {
 			return head;
 		}
+		//Check if head.next is null. If true, return head as it is a single node and already sorted
 		else if(head.next==null){
 			return head;	 
 		}
+		//Find the middle node of the linked list using the listMid method.
 		ListNode firstMidNode=listMid(head);
+		//Get the second half of the linked list by assigning secondMidNode.
+		//next to secondHalfNodes and disconnecting the first half from the second half by setting firstMidNode.next to null.
 		ListNode secondMidNode=firstMidNode.next;
 		firstMidNode.next=null;
-		ListNode firstHalfNodes=mergeSort(head);
-		ListNode secondHalfNodes=mergeSort(secondMidNode);
+		
+		ListNode firstHalfNodes=mergeSort(head);//Recursively call mergeSort on the first half of the linked list.
+		ListNode secondHalfNodes=mergeSort(secondMidNode);//Recursively call mergeSort on the second half of the linked list.
+		//Merge the two sorted halves using the merge method and assign the result to mergeTwoLists.
 		ListNode mergeTwoLists=merge(firstHalfNodes,secondHalfNodes);
+		//Return the merged and sorted linked list.
 		return mergeTwoLists;
 		
 	}
+	//to Understand this code go to class " MergTwoSortedLists ".
 	public static ListNode merge(ListNode head1,ListNode head2){
 		if(head1==null) {
 			return head2;
@@ -89,7 +98,7 @@ public class MergeSort {
 		return headNode;
 		
 	}
-	
+	//to Understand this code go to class " MiddleElementOfLinkedList  ".
 	public  static ListNode listMid(ListNode head){
 		if(head==null) {
 			return head;
