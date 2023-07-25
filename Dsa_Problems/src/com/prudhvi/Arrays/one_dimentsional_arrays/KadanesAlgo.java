@@ -18,14 +18,14 @@ public class KadanesAlgo {
 		int ans=kadanes(arr);
 		System.out.println(ans);
 	
-		
-		int[] arr1= {1, 2, 3, 4, -10};
-		int ans1=kadanes(arr1);
-		System.out.println(ans1);
-		
-		int[] arr3= {-163,-20};
-		int ans2=kadanes(arr3);
-		System.out.println(ans2);
+//		
+//		int[] arr1= {1, 2, 3, 4, -10};
+//		int ans1=kadanes(arr1);
+//		System.out.println(ans1);
+//		
+//		int[] arr3= {-163,-20};
+//		int ans2=kadanes(arr3);
+//		System.out.println(ans2);
 		
 		
 	}
