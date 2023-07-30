@@ -47,4 +47,10 @@ public  class TreeNode  implements TreeNodeInterface{
 		return 0;
 	}
 
+	@Override
+	public String toString() {
+		return "TreeNode [val=" + val + ", left=" + left + ", right=" + right + "]";
+	}
+	
+	
 }
