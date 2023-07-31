@@ -1,7 +1,6 @@
 package com.prudhvi.trees;
 
 import java.util.ArrayList;
-
 public  class TreeNode  implements TreeNodeInterface{
 	int val;
 	TreeNode left;
