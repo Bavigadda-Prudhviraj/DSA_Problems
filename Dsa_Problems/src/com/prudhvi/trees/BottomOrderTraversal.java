@@ -20,6 +20,19 @@ public class BottomOrderTraversal {
 	/*
 	The bottomOrderTraversal method performs a bottom-up level-order traversal of a binary tree and returns a list of lists, where each inner list contains the nodes at a specific vertical level, ordered from bottom to top.
 	
+	Time Complexity:
+		The time complexity of this algorithm is O(N), where N is the number of nodes in the binary tree, as each node is visited once.
+	Space Complexity:
+		The space complexity is O(M), where M is the maximum number of nodes at any level in the binary tree. 
+		In the worst case, the maximum number of nodes at any level is N/2 for a balanced binary tree, 
+		and it can be as large as N for a skewed binary tree.
+		Note:
+				it contains two level nodes at a time last level & before last level 
+				LastLevel:in Balanced binary tree last level contains at most ((n+1)/2),which is greater then or equal to half nodes of the entire tree
+				Last second level= it contains ((N+1)/4) nodes
+				max space= last Level + last second level
+						 =   (n+1)/2  + (n+1)/4
+						 =       O(n)
 	 */
 	public static ArrayList<ArrayList<Integer>> bottomOrderTraversal(TreeNode root){
 		ArrayList<ArrayList<Integer>> bottomOrderTraversArrayList=new ArrayList<>();//the list that will store the bottom order traversal of the binary tree.
