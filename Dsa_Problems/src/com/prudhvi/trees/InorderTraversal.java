@@ -29,7 +29,7 @@ public class InorderTraversal {
 			the height of the tree can be N, resulting in a space complexity of O(N). 
 			In the best-case scenario, where the binary tree is balanced, the height of the tree is log(N), resulting in a space complexity of O(log(N)).
 	 */
-	public ArrayList<Integer> inorderTraversal( TreeNode Node) {
+	public static ArrayList<Integer> inorderTraversal( TreeNode Node) {
 		//The public inorderTraversal method initializes an empty ArrayList called inOrderTraversal to store the result.
 		ArrayList<Integer> inOrderTraversalArr=new ArrayList<>();
 		//It calls the private inorderTraversal method and passes the root node of the binary tree (Node) and the inOrderTraversal ArrayList.
