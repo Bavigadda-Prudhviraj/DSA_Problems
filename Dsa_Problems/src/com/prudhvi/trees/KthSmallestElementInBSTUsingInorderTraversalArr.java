@@ -16,6 +16,9 @@ public class KthSmallestElementInBSTUsingInorderTraversalArr {
 		System.out.println(answer);
 	}
 	/*first Approach 
+	The provided code defines a method inorderTraversal that performs an inorder traversal of a binary search tree (BST) rooted at root and finds the kth smallest element in the BST. 
+	It uses a combination of recursive traversal and a global counter to keep track of the visited nodes and find the kth smallest element.
+	
 	Time Complexity:
 			The time complexity of the inorderTraversal method is determined by the number of nodes visited during the inorder traversal until the kth smallest element is found. 
 			In the worst case, where we have to traverse the entire BST to find the kth smallest element, the time complexity is O(N), where N is the total number of nodes in the BST.
