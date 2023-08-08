@@ -14,8 +14,24 @@ public class TwoSumBST {
 		TreeNode root=SortedArrayToBalancedBST.sortedArrayToBalancedBST(arr);
 		int answer=two2Sum(root, 11);
 		System.out.println(answer);
+		int answer1=twoSumUsingMorrisInoderTraversal(root,11);
+		System.out.println(answer1);
 
 	}
+	////first Approach
+	private static int twoSumUsingMorrisInoderTraversal(TreeNode root, int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//Second Approach
 	/*
 	This code defines a method two2Sum that takes a binary tree node root and an integer target as parameters. 
 	The goal of the method is to determine whether there are two distinct nodes in the binary tree whose values add up to the given target. 
