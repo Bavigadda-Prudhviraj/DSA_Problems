@@ -2,8 +2,6 @@ package com.prudhvi.trees;
 
 import java.util.ArrayList;
 
-import javax.swing.event.AncestorEvent;
-
 public class KthSmallestElementInBSTUsingInorderTraversalArr {
 	
 	public static void main(String[] args) {
