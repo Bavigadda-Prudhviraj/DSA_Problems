@@ -256,12 +256,73 @@ package com.prudhvi.custom_data_types.hashmap;
 						A good multiplier should be close to an irrational number, and its value is often chosen based on empirical testing and analysis.
 						
 						In practice, modern programming languages and libraries, such as Java's HashMap, use more advanced and well-tuned hash functions based on the multiplication method to ensure good distribution, reduce collisions, and provide efficient access to the stored values.
-		
+	
+	
+	Collision:
+			A "collision" refers to a situation where two distinct elements or objects have the same hash value when processed by a hash function. 
+			Hash functions are used to map data of arbitrary size to fixed-size values (hash codes) in various applications, such as hash tables, hash maps, cryptographic algorithms, and more.
+				
+				Collision handling methods are techniques
+						1.Separate Chaining(Open Hashing):
+						2.Open Addressing (Closed Hashing):
+								i.linear probing:
+								ii.quadrtic probing:
+								iii.Double Hashing:
 			
 			
-			
-			
-			
-			
+			1.Separate Chaining:
+					Separate chaining is a collision resolution technique used in hash-based data structures, such as hash maps or hash tables. 
+					It involves maintaining a collection (usually a linked list) of elements for each bucket in the hash table. 
+					When a collision occurs (i.e., multiple keys hash to the same index), the colliding elements are stored in the same bucket using this collection.
+					Implementation:
+							1.Initialization: 
+									Start with an array (hash table) with a fixed number of buckets. 
+									Each bucket will hold a collection of elements that hash to the same index.
+							2.Hash Function: 
+									When you insert or search for an element, apply a hash function to the key to determine the index (bucket) where the element should be placed or searched.
+							3.Insertion:
+									i.Apply the hash function to the key to determine the index.
+									ii.If the bucket at the determined index is empty, insert the element directly into that bucket.
+									iii.If the bucket is not empty (collision occurs), add the new element to the collection associated with that bucket (e.g., a linked list).
+							4.Search:
+									i.Apply the hash function to the key to determine the index.
+									ii.Search the collection in the bucket at the determined index for the desired element. 
+									   This involves traversing the linked list and comparing keys until a match is found or the end of the list is reached.
+							5.Deletion:
+									i.Apply the hash function to the key to determine the index.
+									ii.Search the collection in the bucket at the determined index for the element to delete. 
+									   If found, remove the element from the collection.
+							6.Handling Collisions: 
+									i.The separate chaining approach ensures that even if multiple keys hash to the same index, they can be stored and managed within the same bucket using a linked list or similar data structure.
+							7.Performance and Load Factor: 
+									i.The efficiency of separate chaining depends on the distribution of keys and the load factor (ratio of elements to buckets). 
+									  With a well-distributed hash function and an appropriate load factor, separate chaining can provide efficient operations.
+									 
+									 Load Factor:
+											Increasing the capacity of a hash-based data structure as per the load factor involves resizing the structure to accommodate a higher number of elements while maintaining a reasonable load factor. 
+											The load factor is the ratio of the number of elements to the number of buckets in the hash table. Resizing ensures that the load factor does not exceed a certain threshold, typically around 0.75 to 0.80, to prevent excessive collisions and maintain good performance.
+											
+											Here's a step-by-step explanation of how increasing the capacity based on the load factor is typically implemented:
+												1.Initial State: 
+														Start with an initial hash table with a fixed number of buckets and a specified load factor threshold. The load factor threshold is the point at which resizing will be triggered.
+												2.Insertion:
+														i.When inserting an element, calculate the load factor by dividing the number of elements by the number of buckets.
+														ii.If the calculated load factor exceeds the load factor threshold, it's time to resize the hash table to accommodate more elements while maintaining an acceptable load factor.
+												3.Resizing:
+														i.Create a new hash table with a larger number of buckets (e.g., double the current size or use another growth factor).
+														ii.Rehash all existing elements from the old hash table into the new one based on their keys and the new hash function. 
+														   Rehashing recalculates the bucket index for each element in the context of the new hash table size.
+														ii.This redistribution of elements helps ensure a more balanced distribution and reduces the likelihood of collisions in the new hash table.
+												4.Post-Resizing:
+														i.After rehashing, the new element is inserted into the resized hash table as usual.
+														ii.The load factor is calculated again based on the new number of elements and buckets.
+												5.Deletion Considerations:
+														i.If the hash-based data structure supports deletion, it's important to update the load factor after each deletion and check whether resizing down is necessary to prevent becoming too sparse.
+											
+									Increasing the capacity based on the load factor helps maintain a balance between memory usage and performance. 
+									By periodically resizing the hash table as the number of elements grows, you can ensure that the load factor remains within an acceptable range, minimizing collisions and keeping operations efficient.
+																						
+																				
+																					
 			
 */
