@@ -42,7 +42,7 @@ public class MyHashMap <K,V>{
 	class Node{
 		K key;
 		V value;
-		Node(K key,v value){
+		Node(K key,V value){
 			this.key=key;
 			this.value=value;
 		}
