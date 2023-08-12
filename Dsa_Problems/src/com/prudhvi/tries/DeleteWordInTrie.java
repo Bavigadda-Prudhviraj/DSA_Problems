@@ -75,7 +75,7 @@ public class DeleteWordInTrie {
 				
 			}
 		}
-		//temp.isEnd=false;
+		temp.isEnd=false;
 		stack.clear();
 		return true;
 		
