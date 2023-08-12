@@ -1,0 +1,10 @@
+package com.prudhvi.queue;
+
+public class FirstNonRepeatingCharacter {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
