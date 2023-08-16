@@ -2,7 +2,6 @@ package com.prudhvi.tries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Stack;
 
 
 public class DeleteWordInTrie {
@@ -22,102 +21,131 @@ public class DeleteWordInTrie {
 	private static void check(TriesOfChar root, String string) {
 		for(int i=0;i<string.length();i++) {
 			int charaIndex=string.charAt(i)-'a'; //17
-			System.out.println(string.charAt(i)+" "+charaIndex);
-			if(root.child[charaIndex]==null) {
-				System.out.println(i+" "+charaIndex+" test");
+			if(root.child[charaIndex]==null) {   
+				System.out.println(string.charAt(i)+"=null");
 				break;
 			}
 			root=root.child[charaIndex];
 		}
-		System.out.println("checked");
 		
+	}
+	private static boolean deleteWordInTrie(TriesOfChar root,String word) {
+		ArrayList<TriesOfChar> track = new ArrayList<>();
+		TriesOfChar temp = root;
+		for(int i = 0; i < word.length(); i++) {
+			int idx = word.charAt(i) - 'a';
+			if(temp.child[idx] == null) {
+				return false;
+			}
+			temp = temp.child[idx];
+			temp.letterFrequency--;
+			track.add(temp);
+		}
+		
+		if(temp.isEnd == false) {
+			return false;
+		}
+		temp.isEnd=false;
+		// valid word
+		// backtrack the stack
+		int N = track.size(); //it will be same as length of the string as we are storing all characters in the track
+		for(int i = N - 1; i >=0; i--) {
+			int index = word.charAt(i) - 'a';// we are iterating from right to left so i will last character
+			temp = track.get(i);
+			// check number of branches
+			boolean empty = true;
+			for(int j = 0; j < 26; j++) {
+				if(temp.child[j] != null) {
+					empty = false;
+					break;
+				}
+			}
+			if(empty) {
+				// eligible for remove
+				TriesOfChar parent = track.get(i - 1);
+				parent.child[index] = null;
+			} else {
+				// break
+				break;
+			}
+		}
+		
+		return true;
 	}
 
-	private static boolean deleteWordInTrie(TriesOfChar root, String word) {
-		Stack<TriesOfChar> stack=new Stack<>();
-		TriesOfChar temp=root;
-		boolean isWordExist=true;
-		for(int i=0;i<word.length();i++) {
-			int charIndex=word.charAt(i)-'a';
-			if(temp.child[charIndex]==null) {
-				stack.clear();
-				return true;
-			}
-			stack.add(temp);
-			temp=temp.child[charIndex];
-			
-		}
-		System.out.println(stack);
-		if(isWordExist==true) {
-			while(!stack.isEmpty()){
-				TriesOfChar stackTopTrie=stack.pop();// trie type with 26 array
-				if(stackTopTrie.child!=null) {
-					boolean isletterUsed=false;
-					int wordLastindex=word.length()-1; //letters index from last letter because in stack letter in reverse order
-					int index=-1;						//this index is use full for making child as null
-					for(int i=0;i<stackTopTrie.child.length;i++) {
-						//stackTopTrie=stackTopTrie.child[i];
-						int lastCharIndex=word.charAt(wordLastindex)-'a';//getting the char index r=17,a=0,t=19
-						index=lastCharIndex;
-						//if any char in not null then it is not leaf tires we can delete
-						//stackTopTrie.child[lastCharIndex] it means that ending char is part of another letter
-						if(stackTopTrie.child[i]!=null &&  //all should be null
-								stackTopTrie.child[lastCharIndex]!=null && 
-								i!=lastCharIndex && //is nor equal to char index
-								stackTopTrie.child[lastCharIndex].letterFrequency>1){ //that latter frequency should be >1
-							isletterUsed=true;
-							//break;
-						}
-					}
-					//all remaining are null that char is not used in any other word
-					if(isletterUsed==false && !stack.isEmpty()) {
-						stack.peek().child[index]=null;
-					}
-					//that char is is part of another word so we not deleting it
-					else {
-						stack.clear();
-						return true;
-					}
-					wordLastindex--;
-				}
-				
-				
-			}
-		}
-		//edit
-		temp.isEnd=false;
-		stack.clear();
-		return true;
-		
-		
-	}
+//	private static boolean deleteWordInTrie(TriesOfChar root, String word) {
+//		Stack<TriesOfChar> stack=new Stack<>();
+//		TriesOfChar temp=root;
+//		boolean isWordExist=true;
+//		for(int i=0;i<word.length();i++) {
+//			int charIndex=word.charAt(i)-'a';
+//			if(temp.child[charIndex]==null) {
+//				stack.clear();
+//				return true;
+//			}
+//			stack.add(temp);
+//			temp=temp.child[charIndex];
+//			
+//		}
+//		System.out.println(stack);
+//		if(isWordExist==true) {
+//			while(!stack.isEmpty()){
+//				TriesOfChar stackTopTrie=stack.pop();// trie type with 26 array
+//				if(stackTopTrie.child!=null) {
+//					boolean isletterUsed=false;
+//					int wordLastindex=word.length()-1; //letters index from last letter because in stack letter in reverse order
+//					int index=-1;						//this index is use full for making child as null
+//					for(int i=0;i<stackTopTrie.child.length;i++) {
+//						//stackTopTrie=stackTopTrie.child[i];
+//						int lastCharIndex=word.charAt(wordLastindex)-'a';//getting the char index r=17,a=0,t=19
+//						index=lastCharIndex;
+//						//if any char in not null then it is not leaf tires we can delete
+//						//stackTopTrie.child[lastCharIndex] it means that ending char is part of another letter
+//						if(stackTopTrie.child[i]!=null &&  //all should be null
+//								stackTopTrie.child[lastCharIndex]!=null && 
+//								i!=lastCharIndex && //is nor equal to char index
+//								stackTopTrie.child[lastCharIndex].letterFrequency>1){ //that latter frequency should be >1
+//							isletterUsed=true;
+//							//break;
+//						}
+//					}
+//					//all remaining are null that char is not used in any other word
+//					if(isletterUsed==false && !stack.isEmpty()) {
+//						stack.peek().child[index]=null;
+//					}
+//					//that char is is part of another word so we not deleting it
+//					else {
+//						stack.clear();
+//						return true;
+//					}
+//					wordLastindex--;
+//				}
+//				
+//				
+//			}
+//		}
+//		//edit
+//		temp.isEnd=false;
+//		stack.clear();
+//		return true;
+//		
+//		
+//	}
 	//perfectly working
 	private static void singleTrieWithMultipleWords(TriesOfChar root,String word){
-		System.out.println("creating tree------------------------");
 		TriesOfChar temp=root;
-		System.out.println(word);
 		for(int i=0;i<word.length();i++) {
 			int charIndex=word.charAt(i)-'a';
 			//System.out.println(word.charAt(i)+" "+charIndex);
 			if(temp.child[charIndex]==null) {
 				TriesOfChar newNode=new TriesOfChar();
 				temp.child[charIndex]=newNode;
-				//temp.letterFrequency++;
 			}
-			//temp.letterFrequency++;//it will increase the frequency of letter(at that index) when ever it is a part of any word
-			
 			temp=temp.child[charIndex]; 
 			temp.letterFrequency++;
-			System.out.println("letter Frequency "+temp.letterFrequency+" "+charIndex);//temp.child[charIndex].letterFrequency
-		
-			
 		}
 		temp.isEnd=true;
 		temp.wordFrequency++;
-		System.out.println("tree created-------------------");
-		
-	
-	
 	}
 }
 /*
