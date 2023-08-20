@@ -14,65 +14,59 @@ public class MaximumXORSubarray {
 		0 <= A[i] <= 109
 	 */
 	public static void main(String[] args) {
-		ArrayList<Integer> arr=new ArrayList<>(Arrays.asList(1, 4, 3));//1, 4, 3
+		ArrayList<Integer> arr=new ArrayList<>(Arrays.asList(33,29,18));//1,2  //1, 4, 3
 		ArrayList<Integer> maxSubArrXor=maxSubArrayXor(arr);
 		System.out.println(maxSubArrXor);
 	}
-	private static ArrayList<Integer> maxSubArrayXor(ArrayList<Integer> arr) {
-		ArrayList<Integer> prefixXorList=new ArrayList<>();
-		if(arr.size()==1) {
-			return new ArrayList<>(List.of(1,1));
-		}
-		prefixXorList.add(arr.get(0));
-		for(int i=1;i<arr.size();i++) {
-			prefixXorList.add(prefixXorList.get(i-1)^arr.get(i));
-		}
-		prefixXorList.add(0);
-		System.out.println(prefixXorList);
-		ArrayList<Integer> maxSubArrIndexArr=maxSubXor(prefixXorList);
-		return maxSubArrIndexArr;
-	}
+	/*
+	Function maxSubArrayXor that aims to find a sub array with the maximum XOR value among all sub arrays of a given array. 
+	The approach involves utilizing a trie data structure to efficiently compute the XOR of sub arrays and identify the sub array with the maximum XOR
+	
+	Time Complexity:
+			Constructing the trie takes O(N * log MAX), where N is the number of elements in the array and MAX is the maximum value in the array.
+			For each element in the array, the trie operations take O(log MAX) time.
+			Therefore, the overall time complexity of the function is O(N * log MAX).
 
-	private static ArrayList<Integer> maxSubXor(ArrayList<Integer> prefixXorList) {
-		ArrayList<Integer> maxSubArrIndexArr=new ArrayList<>(List.of(-1,-1));
-		int maxNum=findMax(prefixXorList);
-		int msb=msb(maxNum);
+	Space Complexity:
+			The space complexity is determined by the storage used for the trie nodes, which can hold a maximum of O(N * log MAX) nodes.
+			Additionally, a constant amount of extra space is used for variables and temporary storage.
+			Therefore, the overall space complexity is O(N * log MAX).
+	 */
+	private static ArrayList<Integer> maxSubArrayXor(ArrayList<Integer> arr) {
+		int maxXor=Integer.MIN_VALUE;
+		int maxNum=findMax(arr);// Find the maximum number in the array
+		int msb=msb(maxNum);// Find the position of the most significant bit in the maximum number
+		int start=0,end=0,preXor=0;
 		TrieNode root=new TrieNode();
-		for(int i=0;i<prefixXorList.size();i++) {
-			eleInsertIntoTrie(root,prefixXorList.get(i),msb);
-		}
-		int maxXor=-1;
-		int len=0;
-		for(int i=0;i<prefixXorList.size();i++) {
-			ArrayList<Integer> xor_num=maxXor(root,prefixXorList.get(i),msb);
-			if(maxXor<=xor_num.get(0)) {
-				int secondIndex=prefixXorList.indexOf(xor_num.get(1));
-				int minIndex=Math.min(i, secondIndex+1);
-				int maxIndex=Math.max(i, secondIndex);
-				if(maxXor<xor_num.get(0)) {
-					maxSubArrIndexArr.set(0,minIndex+1);
-					maxSubArrIndexArr.set(1,maxIndex);
-					len=maxIndex-minIndex+1; 
+		insertEleIntoTrie(root,preXor,msb,-1);// Insert an initial element into the Trie (Note:- Why? reason below)
+		for(int i=0;i<arr.size();i++) {
+			preXor^=arr.get(i);// Calculate the prefix XOR
+			insertEleIntoTrie(root,preXor,msb,i);// Insert the prefix XOR into the Trie
+			ArrayList<Integer> xor_index=maxXor(root, preXor, msb);// Find the maximum XOR and its corresponding index
+			int currentXor=xor_index.get(0);// Get the maximum XOR value
+			//xor_index.get(1) retrieves the 0-based index from the xor_index ArrayList.
+			//Adding 1 to this value effectively converts it to a 1-based index, which is the desired format for the output.
+			int index=xor_index.get(1)+1;	// Get the corresponding index for the maximum XOR & Incrementing index
+			if(maxXor<currentXor) {
+				maxXor=currentXor;// Update the maximum XOR value
+				start=index;// Update the start index of the sub array
+				end=i;// Update the end index of the sub array
+			}
+			else if(maxXor==currentXor) {
+				int prevLen=end-start+1;
+				int newLen=i-index+1;
+				if(newLen<prevLen) {
+					start=index;
+					end=i;
 				}
-				else if(maxXor==xor_num.get(0)){
-					if(len==(maxIndex-minIndex+1)) {
-						if(minIndex>maxSubArrIndexArr.get(0)) {
-							maxSubArrIndexArr.set(0,minIndex);
-							maxSubArrIndexArr.set(1,maxIndex);
-						}
-						
-					}
-					else {
-						maxSubArrIndexArr.set(0,minIndex);
-						maxSubArrIndexArr.set(1,maxIndex);
-					}
-					
+				else if (newLen==prevLen && index<start){
+					start=index;
+					end=i;
 				}
-				
-				maxXor=xor_num.get(0);
 			}
 		}
-		return maxSubArrIndexArr;
+		
+		return new ArrayList<>(List.of(start+1,end+1));
 	}
 	private static int findMax(ArrayList<Integer> prefixXorList) {
 		int max=-1;
@@ -88,42 +82,59 @@ public class MaximumXORSubarray {
 		}
 		return -1;
 	}
-	private static void eleInsertIntoTrie(TrieNode root, int num, int msb) {
+	private static void insertEleIntoTrie(TrieNode root, int xor, int msb,int index) {
 		TrieNode temp=root;
 		for(int i=msb;i>=0;i--){
-			int digit=(num&(1<<i))>0?1:0;
+			int digit=(xor&(1<<i))>0?1:0;
 			if(temp.child[digit]==null) {
 				temp.child[digit]=new TrieNode();
 			}
 			temp=temp.child[digit];
 			temp.index=i;
 		}
+		temp.index=index;
+		temp.val=xor;
 	
 	}
 	private static ArrayList<Integer> maxXor(TrieNode root, int num, int msb) {
 		TrieNode temp=root;
-		int xor=0;
 		for(int i=msb;i>=0;i--) {
-			int digit=(num&(1<<i))>0?1:0;
+			int digit=(num&(1<<i))>=0?1:0;
 			if(temp.child[1-digit]!=null) {
-				xor+=(1<<i);
 				temp=temp.child[1-digit];
 			}else {
 				temp=temp.child[digit];
 			}
 		}
 		int index=temp.index;
-		int anotherNum=xor^num;
-		ArrayList<Integer> xor_num=new ArrayList<>(List.of(xor,anotherNum,index));
-		System.out.println(" xorValue: "+xor+" num: "+num+" anotherNum: "+anotherNum );
+		int xor=temp.val^num;
+		ArrayList<Integer> xor_num=new ArrayList<>(List.of(xor,index));
 		return xor_num;
 	}
 }
 class TrieNode{
 	TrieNode[] child;
 	int index;
+	int val;
 	public TrieNode() {
 		child=new TrieNode[2];
 		index=-1;
 	}
 }
+	/*
+	Inserting 0 into the Trie before iterating through the array is a crucial step in the algorithm to handle the case where the XOR of a sub array from index 0 to i is maximum. 
+	It's done to ensure that the XOR value of the sub array starting at index 0 is also considered in the comparisons.
+		
+		Here's why inserting 0 into the Trie before iterating is important:
+			1.Handling Sub arrays Starting from Index 0: 
+					When you're iterating through the array, you are calculating the XOR of sub arrays starting from index 0 up to the current index i. 
+					However, the code inside the loop considers only sub arrays starting from index 1 (i.e., it calculates preXor for the current index and inserts it into the Trie). 
+					This means that the sub array starting from index 0 is not considered in the loop, potentially missing out on the maximum XOR value if it happens to be the largest.
+		
+			2.Inserting 0 into Trie: 
+					By inserting 0 into the Trie before starting the loop, you're considering the XOR value of the sub array starting from index 0. 
+					This ensures that the maximum XOR value of sub arrays starting from index 0 to i is correctly calculated and considered in the loop's comparisons.
+	
+	In summary, inserting 0 into the Trie at the beginning ensures that the algorithm accounts for the XOR value of the sub array starting from index 0. This is necessary to handle all possible sub arrays and accurately find the maximum XOR value and its corresponding indices.
+
+	 */
