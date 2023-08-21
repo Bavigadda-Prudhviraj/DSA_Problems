@@ -28,7 +28,7 @@ public class Kmp_Algo_NPS_Array {
 			//Get the LPS value of the previous character LPS_arr[i-1] and assign it to the variable index.
 			int index=LPS_arr[i-1]; // i-1 it doesn't work
 			//Enter a while loop to find the LPS value for the current character.
-			//Check if the character at the current index str.charAt(i) is equal to the character at the index index in the string.
+			//Check if the character at the current index str.charAt(i) is equal to the character at the index  in the string.
 			while (str.charAt(i)!=str.charAt(index)){
 				if(index<=0) {
 					index=-1;
