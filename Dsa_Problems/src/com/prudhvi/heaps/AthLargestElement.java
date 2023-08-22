@@ -17,8 +17,8 @@ public class AthLargestElement {
 		1 <= B[i] <= INT_MAX
 	 */
 	public static void main(String[] args) {
-		ArrayList<Integer> arr=new ArrayList<>(List.of(15, 20, 99, 1));
-		int k=2;
+		ArrayList<Integer> arr=new ArrayList<>(List.of(1,2,3,4,5,6));//-1, -1, -1, 1, 2, 3 //15, 20, 99, 1-> -1, 15, 20, 20
+		int k=4;
 		ArrayList<Integer> answerArrayList=KthLargestEleInArr(arr,k);
 		System.out.println(answerArrayList);
 
@@ -28,15 +28,16 @@ public class AthLargestElement {
 		ArrayList<Integer> answer=new ArrayList<>(arr.size());
 		PriorityQueue<Integer> minHeap=new PriorityQueue<>();
 		for(int i=0;i<arr.size();i++) {
-			if(minHeap.size()<k) {
+			if(minHeap.size()<k-1) {
 				minHeap.add(arr.get(i));
 				answer.add(-1);
 			}
-				if(minHeap.peek()<arr.get(i)) {
-					minHeap.poll();
-					minHeap.add(arr.get(i));
-					answer.add(minHeap.peek());
-				}
+			while(minHeap.peek()<arr.get(i)) {
+				minHeap.poll();
+				 
+			}
+			 minHeap.add(arr.get(i));
+				answer.add(minHeap.peek());
 			
 		}
 		return answer;
