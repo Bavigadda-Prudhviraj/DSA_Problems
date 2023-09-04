@@ -25,15 +25,11 @@ public class UniquePathsInGrid {
 	private static int tabulatedUnique(int[][] arr) {
 	    int m = arr.length;
 	    int n = arr[0].length;
-	    
 	    // Create a table dp with the same dimensions as arr
 	    int[][] dp = new int[m][n];
-	    
 	    // Initialize the last cell if it's not blocked
 	    if (arr[m - 1][n - 1] != 1) 
 	        dp[m - 1][n - 1] = 1;
-	    
-	    
 	    // Fill the last row and last column
 	    for (int i = m - 2; i >= 0; i--) 
 	        if (arr[i][n - 1] != 1) 
