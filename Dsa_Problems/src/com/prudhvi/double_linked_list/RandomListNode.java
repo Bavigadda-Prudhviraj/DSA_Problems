@@ -17,9 +17,9 @@ import java.util.HashMap;
 		0 <= |A| <= 106
  */
 class RandomListNode {
-    int label;
+    int val;
     RandomListNode next, random;
-    RandomListNode(int x) { this.label = x; }
+    RandomListNode(int x) { this.val = x; }
     
     /*
     The given code is used to create a deep copy of a linked list with random pointers. 
@@ -37,7 +37,7 @@ class RandomListNode {
         RandomListNode temp=head;
         
         while(temp!=null){
-            RandomListNode newNode=new RandomListNode(temp.label);//For each node temp, create a new node newNode with the same label as temp.
+            RandomListNode newNode=new RandomListNode(temp.val);//For each node temp, create a new node newNode with the same label as temp.
             newNode.next=temp.next; //Set the next pointer of newNode to temp.next
             temp.next=newNode;	//Update the next pointer of temp to newNode.
             temp=temp.next.next;    //Move temp to the next node (skip the copied node) by temp=temp.next.next.     
@@ -96,7 +96,7 @@ class RandomListNode {
         HashMap<RandomListNode,RandomListNode> addresses=new HashMap<>();
         //Create two pointers h1 and h2 and initialize h1 with the head of the original list and h2 with a new RandomListNode with the same label as the head node.
         RandomListNode h1=head;
-        RandomListNode deepCopyListNode=new RandomListNode(head.label);
+        RandomListNode deepCopyListNode=new RandomListNode(head.val);
         //Create a temporary pointer temp and set it equal to h2.
         RandomListNode temp=deepCopyListNode;
         //Add the mapping between h1 (original node) and temp (copied node) to the addresses HashMap.
@@ -104,7 +104,7 @@ class RandomListNode {
         h1=h1.next;//Move h1 to the next node and iterate over the rest of the original list.
         while(h1!=null){
         	//create a new RandomListNode with the label of the current h1 node 
-            RandomListNode node=new RandomListNode(h1.label);
+            RandomListNode node=new RandomListNode(h1.val);
             //and assign it to temp.next. 
             temp.next=node;
             //Move temp to the newly created node.
