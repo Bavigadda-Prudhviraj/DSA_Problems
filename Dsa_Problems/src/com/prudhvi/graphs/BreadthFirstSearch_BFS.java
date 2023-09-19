@@ -1,4 +1,4 @@
-package com.prudhvi.gaphs;
+package com.prudhvi.graphs;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
