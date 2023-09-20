@@ -71,18 +71,29 @@ public class Batches {
 				
 	In summary, the batchDivision method has a time complexity of approximately O(relation.length * log(nodes)) and a space complexity of O(nodes) due to the use of the DSU data structure and the map to track groups.
 	 */
+	/*
+	This is the entry point of the batch division algorithm. It takes several parameters:
+		nodes: The number of nodes.
+		strength: An array representing the strengths of nodes.
+		relation: A 2D array representing relationships between nodes.
+		capacity: The capacity constraint for each group.
+	 */
 	private static int batchDivision(int nodes, int[] strength, int[][] relation, int capacity) {
-		BatchDsu graph=new BatchDsu(nodes);
+		BatchDsu graph=new BatchDsu(nodes);//An instance of the BatchDsu class is created. This class appears to implement a disjoint-set union (DSU) data structure to manage groups.
+		//iterates through the relationships defined in the relation array and inserts them into the graph using graph.insetIntoGraph(relation[i][0], relation[i][1]);. This operation essentially combines nodes into groups based on relationships.
 		for (int i = 0; i < relation.length; i++) {
 			graph.insetIntoGraph(relation[i][0], relation[i][1]);
 		}
-		
+		// iterates through the relationships again. However, in this loop, it calls graph.findGrandParent(relation[i][0]); and graph.findGrandParent(relation[i][1]);. This appears to be an attempt to optimize the DSU structure by finding the grandparent of nodes.
+		//it is imp because it makes all group members parent same
 		for (int i = 0; i < relation.length; i++) {
 			 graph.findGrandParent(relation[i][0]);
 			 graph.findGrandParent(relation[i][1]);
 		}
-		int[] arr=graph.parent;
+		int[] arr=graph.parent;//The parent array of the BatchDsu instance is retrieved. This array represents the group assignments for each node.
+		//A HashMap is created to map group IDs to their total strengths.
 		HashMap<Integer, Integer> map=new HashMap<>();
+		//iterates through the parent array, and for each node, it calculates the group (represented by the parent) and accumulates the strength of nodes in the same group.
 		for (int i = 1; i < arr.length; i++) {
 			int group=arr[i];
 			if(map.containsKey(group)) {
@@ -91,13 +102,16 @@ public class Batches {
 				map.put(group, strength[i-1]);
 			}
 		}
-		int groups=0;
+		int groups=0;//a variable groups to count the number of groups that meet the capacity constraint.
+		//iterates through the HashMap, where each entry represents a group ID and its total strength.
 		for(Map.Entry<Integer,Integer> ele:map.entrySet()) {
+			//it calculates the number of groups by dividing the total strength of each group by the specified capacity. If the result is greater than 0, it increments the groups counter.
 			int cap=ele.getValue()/capacity;
 			if(cap>0) {
 				groups+=1;
 			}
 		}
+		//returns the groups variable, which represents the number of groups formed based on the relationships and strength with the capacity constraint.
 		return groups;
 	}
 
@@ -134,12 +148,6 @@ class BatchDsu{
 			rank[gpu]+=uRank+1;
 		}
 	}
-	public boolean isNodesFromSameConnectedGraph(int u,int v){
-		int gpu=findGrandParent(u);
-		int gpv=findGrandParent(v);
-		if(gpu==gpv) {return true;};
-		return false;
-	}
 }
 /*
 	Here's an explanation of the key components and how they work:
@@ -153,19 +161,12 @@ class BatchDsu{
 
 	batchDivision Function: 
 		This function takes several inputs, including the number of nodes, their strengths, the relationships between nodes, and a capacity constraint.
-
-				1.An instance of the BatchDsu class, named graph, is created to manage the connected components based on the relationships.
-				
-				2.The relationships are inserted into graph using the insetIntoGraph method.
-				
-				3.The grandparent of each node in the relationships is found. This step is likely intended to ensure that the DSU structure is properly updated.
-				
-				4.A HashMap called map is used to store the total strength of nodes in each connected component (group or batch).
-				
-				5.The loop iterates through each node and updates the strength in the corresponding batch in the map based on the connected component it belongs to.
-				
-				6.Finally, the code calculates the number of groups (batches) where the total strength exceeds the given capacity.
-				
+				1.An instance of the BatchDsu class, named graph, is created to manage the connected components based on the relationships.		
+				2.The relationships are inserted into graph using the insetIntoGraph method.			
+				3.The grandparent of each node in the relationships is found. This step is likely intended to ensure that the DSU structure is properly updated.				
+				4.A HashMap called map is used to store the total strength of nodes in each connected component (group or batch).				
+				5.The loop iterates through each node and updates the strength in the corresponding batch in the map based on the connected component it belongs to.				
+				6.Finally, the code calculates the number of groups (batches) where the total strength exceeds the given capacity.				
 				7.It seems that the code is designed to find how many batches can be formed, given the strength and relationships of nodes, while ensuring that each batch's total strength does not exceed the provided capacity constraint. The code effectively uses DSU to manage and track connected components and their strengths.
 				
 */
