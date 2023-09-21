@@ -1,4 +1,4 @@
-package com.prudhvi.graphs;
+package com.prudhvi.graphs.depth_first_search_DFS;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
