@@ -1,4 +1,4 @@
-package com.prudhvi.graphs;
+package com.prudhvi.graphs.breadth_first_search_BFS;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
