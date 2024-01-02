@@ -102,8 +102,6 @@ public class GCD {
     }
 		
 
-	
-
 }
 // Logic
 // Create Frequency Map i.e. Map with key as number and value as frequency of number in array.
