@@ -1,4 +1,4 @@
-package com.prudhvi.leetcode.april;
+package com.prudhvi.leetcode2025.april;
 
 import java.util.Arrays;
 
