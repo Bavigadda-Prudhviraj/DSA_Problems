@@ -1,1 +1,0 @@
-package com.prudhvi.Arrays.one_dimentsional_arrays;
