@@ -9,7 +9,7 @@ package com.prudhvi.maths;
 public class MaximumDifferenceByRemappingADigit_2566 {
 
     public static void main(String[] args) {
-    	System.out.println(minMaxDifference(11891));
+    	System.out.println(minMaxDifferenceOptimized(11891));
         System.out.println(minMaxDifference(11891)); // Test the method
     }
 
