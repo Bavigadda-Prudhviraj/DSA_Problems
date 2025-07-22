@@ -4,12 +4,14 @@ public class Catalan_number {
 	/*
 	nTh catalan number= 2n!/(n+1)!*(n!)
 	N = sum is n-1	
-	c3=c0*c2 + c1*c1 + c0*c2
+	c3=c0*c2 + c1*c1 + c2*c0
 	c4=c0*c3 + c1*c2 + c2*c1 + c3*c0
 	c5=c0*c4 + c1+c3 + c2*c2 + c3*c1 + c4*c0
 	c6=c0*c5 + c1+c4 + c2+C3 + C3*C2 + C4+C1 + C5*C0
 	
-	**Catalan numbers** are a sequence of natural numbers that have numerous applications in combinatorial mathematics, particularly in counting various types of objects and structures. They are named after the Belgian mathematician Eugène Charles Catalan, who introduced them in the 19th century. Catalan numbers are used to count the number of different ways to arrange various structures while respecting certain constraints.
+	**Catalan numbers** are a sequence of natural numbers that have numerous applications in combinatorial mathematics, particularly in counting various types of objects and structures. 
+	*They are named after the Belgian mathematician Eugène Charles Catalan, who introduced them in the 19th century. 
+	*Catalan numbers are used to count the number of different ways to arrange various structures while respecting certain constraints.
 	
 	The nth Catalan number is represented as C(n) and is defined by the following recurrence relation:
 	

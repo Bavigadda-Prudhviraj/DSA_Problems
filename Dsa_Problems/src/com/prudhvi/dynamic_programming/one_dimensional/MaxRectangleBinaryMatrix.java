@@ -27,34 +27,53 @@ public class MaxRectangleBinaryMatrix {
 	In summary, the code has a time complexity of O(rows * columns) and a space complexity of O(1). It efficiently finds the maximum rectangular area in the binary matrix.
 	 */
 	private static int maxRectangle(int[][] arr) {
-		for(int i=0;i<arr.length;i++) {
-			for(int j=0;j<arr[i].length;j++) {
-				if((i==0 && j==0) || j==0) {
-					continue;
-				}
-				if(arr[i][j]==1) {
-					arr[i][j]=arr[i][j-1]+1;
-				}
-			}
-		}
-		int area=0;
-		for(int i=0;i<arr.length;i++) {
-			for(int j=0;j<arr[i].length;j++) {
-				if(arr[i][j]>0) {
-					int height=1;
-					int width=arr[i][j];
-					area=Math.max(area, height*width);
-					int k=i-1;
-					while(k>=0 && arr[k][j]>0){
-						 height++;
-		                 width = Math.min(width, arr[k][j]);
-		                 area = Math.max(area, width * height);
-		                 k--;
-					}
-				}
-			}
-		}
-		return area;
+	    // Check if the input array is valid
+	    if (arr == null || arr.length == 0 || arr[0].length == 0) {
+	        return 0;
+	    }
+
+	    // Step 1: Convert each row into a histogram
+	    // For each cell with value 1, compute the number of consecutive 1s to its left (including itself)
+	    for (int i = 0; i < arr.length; i++) {
+	        for (int j = 0; j < arr[i].length; j++) {
+	            // Skip the first column (j == 0) and the first cell (i == 0, j == 0)
+	            // as they are already initialized or need no modification
+	            if ((i == 0 && j == 0) || j == 0) {
+	                continue;
+	            }
+	            // If the current cell is 1, add 1 to the count of consecutive 1s from the left
+	            if (arr[i][j] == 1) {
+	                arr[i][j] = arr[i][j - 1] + 1;
+	            }
+	            // If the cell is 0, it remains 0 (no consecutive 1s)
+	        }
+	    }
+
+	    // Step 2: Calculate the maximum rectangle area
+	    int maxArea = 0; // Initialize the maximum area
+	    for (int i = 0; i < arr.length; i++) {
+	        for (int j = 0; j < arr[i].length; j++) {
+	            // Process only cells with a positive width (i.e., cells that were originally 1)
+	            if (arr[i][j] > 0) {
+	                int height = 1; // Initialize height to 1 for the current row
+	                int width = arr[i][j]; // Width is the number of consecutive 1s in the current row
+	                // Update maxArea with the rectangle formed by the current row
+	                maxArea = Math.max(maxArea, height * width);
+	                
+	                // Check rows above the current row to form larger rectangles
+	                int k = i - 1;
+	                while (k >= 0 && arr[k][j] > 0) {
+	                    height++; // Increment height for each valid row above
+	                    width = Math.min(width, arr[k][j]); // Update width to the minimum width of all rows considered
+	                    maxArea = Math.max(maxArea, width * height); // Update maxArea if the new rectangle is larger
+	                    k--; // Move to the row above
+	                }
+	            }
+	        }
+	    }
+
+	    // Return the maximum area found
+	    return maxArea;
 	}
 	/*
 	The  code is used to find the maximum area of a rectangle in a binary matrix (`arr`). This code efficiently calculates the maximum rectangle area by maintaining the width of rectangles in each row. Let's break down the code step by step:
