@@ -3,6 +3,7 @@ package com.prudhvi.graphs.grpah_colouring;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /*
@@ -91,5 +92,57 @@ public class CheckBipartiteGraph {
 		//If the entire BFS traversal completes without finding any conflicts, return true, indicating that the subgraph starting from s is bipartite.
 		return true;
 	}
+	
+
+	    public int isGraphBipartite(int numberOfNodes, int[][] edges) {
+	        int[] nodeColors = new int[numberOfNodes];
+	        List<Integer>[] adjacencyList = new ArrayList[numberOfNodes];
+
+	        // Initialize adjacency list
+	        for (int i = 0; i < numberOfNodes; i++) {
+	            adjacencyList[i] = new ArrayList<>();
+	        }
+
+	        // Build the undirected graph
+	        for (int i = 0; i < edges.length; i++) {
+	            int source = edges[i][0];
+	            int destination = edges[i][1];
+	            adjacencyList[source].add(destination);
+	            adjacencyList[destination].add(source);
+	        }
+
+	        // Check each connected component
+	        for (int node = 0; node < numberOfNodes; node++) {
+	            if (nodeColors[node] == 0) {
+	                if (!isComponentBipartite(node, adjacencyList, nodeColors)) {
+	                    return 0; // Not bipartite
+	                }
+	            }
+	        }
+
+	        return 1; // Entire graph is bipartite
+	    }
+
+	    private boolean isComponentBipartite(int startNode, List<Integer>[] adjacencyList, int[] nodeColors) {
+	        Queue<Integer> bfsQueue = new LinkedList<>();
+	        nodeColors[startNode] = 1; // Assign first color
+	        bfsQueue.add(startNode);
+
+	        while (!bfsQueue.isEmpty()) {
+	            int currentNode = bfsQueue.poll();
+	            for (int neighbor : adjacencyList[currentNode]) {
+	                if (nodeColors[neighbor] == 0) {
+	                    nodeColors[neighbor] = 3 - nodeColors[currentNode]; // Alternate color
+	                    bfsQueue.add(neighbor);
+	                } else if (nodeColors[neighbor] == nodeColors[currentNode]) {
+	                    return false; // Same color on both ends => Not bipartite
+	                }
+	            }
+	        }
+
+	        return true;
+	    }
+	
+
 
 }

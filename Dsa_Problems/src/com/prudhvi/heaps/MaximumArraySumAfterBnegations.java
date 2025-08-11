@@ -19,10 +19,22 @@ public class MaximumArraySumAfterBnegations {
 		int nagations=5;
 		int maxSum=maxSumAfterBnegation(arr,nagations);
 		int sum=anotherMethod(arr, nagations);
-		System.out.println(maxSum+" "+sum);
+		System.out.println(maxSum+" "+sum+" "+optimized(arr,nagations));
+		
 		
 
 	}
+    public static int optimized(ArrayList<Integer> A, int B) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(A);
+        for(int i = 1; i <= B; i++){
+            minHeap.add(-minHeap.poll());
+        }
+        int max = 0;
+        for(int num : minHeap){
+            max += num;
+        }
+        return max;
+    }
 	/*
 	Method find the maximum possible sum of the elements in the array after performing a specific number of negations (changing the sign of certain elements). 
 	The approach used here is to utilize a min-heap to maintain the smallest elements and manage the negations effectively.

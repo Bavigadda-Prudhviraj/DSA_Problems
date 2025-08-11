@@ -27,6 +27,45 @@ public class MergeKSortedLists {
 		ListNode sortedListNode=sortedLinkedList(arrayList);
 		ListNode.printLinkedList(sortedListNode);
 	}
+	/**
+     * Merges k sorted linked lists into a single sorted list using a min-heap.
+     * 
+     * Time Complexity: O(T log k), where:
+     *      T = total number of nodes across all lists
+     *      k = number of linked lists
+     * Space Complexity: O(k) for the heap
+     */
+    public static ListNode mergeKLists(ArrayList<ListNode> lists) {
+        // Step 1: Create the min heap (stores only head nodes of each list)
+    	PriorityQueue<ListNode> minHeap = new PriorityQueue<>((a, b) -> a.value - b.value);
+    	for (ListNode node : lists) {
+    	    if (node != null) {
+    	        minHeap.add(node);
+    	    }
+    	}
+
+
+        // Step 2: Use a dummy head to simplify building the merged list
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+
+        // Step 3: Continuously poll the smallest node and push its next node
+        while (!minHeap.isEmpty()) {
+            ListNode smallest = minHeap.poll();  // Get the smallest value node
+            current.next = smallest;             // Attach it to the result
+            current = current.next;               // Move pointer forward
+
+            // If the smallest node has a next, push it into the heap
+            if (smallest.next != null) {
+                minHeap.add(smallest.next);
+            }
+        }
+
+        // Step 4: Return merged list (skip dummy node)
+        return dummy.next;
+    }
+
+ 
 	/*
 	Function sortedLinkedList that takes an ArrayList of sorted linked lists (ListNode objects) and merges them into a single sorted linked list. 
 	It uses a min heap (priority queue) to efficiently merge the linked lists

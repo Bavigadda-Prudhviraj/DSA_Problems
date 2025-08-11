@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class IntersectingChordsInCircle {
 
 	public static void main(String[] args) {
-		int num=2;
+		int num=8;
 		int nthCatalan=nThCatalanNum(num);
 		System.out.println(nthCatalan);
 

@@ -1,1 +1,0 @@
-package com.prudhvi.dynamic_programming.knapsack;
