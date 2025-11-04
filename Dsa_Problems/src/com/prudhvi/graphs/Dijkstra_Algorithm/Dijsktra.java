@@ -84,12 +84,16 @@ public class Dijsktra {
 			graph[u].add(new PairD(w,v));
 			graph[v].add(new PairD(w,u));
 		}
-		//It initializes a priority queue minHeap to store pairs of the form (weight, destination), where weight is the current distance from the source node, and destination is the node's index. The priority queue is used to always select the node with the smallest distance.
+		/**It initializes a priority queue minHeap to store pairs of the form (weight, destination), where weight is the current distance from the source node, and destination is the node's index. The priority queue is used to always select the node with the smallest distance.
 		PriorityQueue<PairD> minHeap=new PriorityQueue<>(new Comparator<PairD>() {
 			public int compare(PairD o1, PairD o2) {
-				return o1.weight-o2.weight;
-			}
-		});
+		return o1.weight-o2.weight;
+		}
+		});*/
+
+
+PriorityQueue<PairD> minHeap = new PriorityQueue<>((o1, o2) -> o1.weight - o2.weight);
+
 		//It adds the source node to the minHeap with a weight of 0 to start the algorithm.
 		minHeap.add(new PairD(0, source));
 		while(!minHeap.isEmpty()){
