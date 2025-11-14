@@ -25,10 +25,9 @@ public class LongestPalindromicSubstring {
 		StringBuilder revStr=new StringBuilder(str);
 		revStr.reverse();
 		int n=str.length();
-		int m=revStr.length();
-		int[][] dp=new int[n][m];
-		for(int i=0;i<dp.length;i++) {
-			for(int j=0;j<dp[i].length;j++) {
+		int[][] dp=new int[n][n];
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
 				if(i==0 && j==0) {
 					dp[i][j]=str.charAt(i)==revStr.charAt(j)?1:0;
 				}else if(i==0 && j>0) {
@@ -45,7 +44,7 @@ public class LongestPalindromicSubstring {
 				}
 			}
 		}
-		return dp[n-1][m-1];
+		return dp[n-1][n-1];
 	}
 	/*
 

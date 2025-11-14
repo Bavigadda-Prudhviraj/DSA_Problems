@@ -20,6 +20,42 @@ public class DistributeCandy {
 		int totalCandies=distributeCandies(arrayList);
 		System.out.println(totalCandies);
 	}
+	public int candy(ArrayList<Integer> ratings) {
+	    int n = ratings.size();
+
+	    // Initialize candies array with 1 candy for each child
+	    ArrayList<Integer> candies = new ArrayList<>();
+	    for (int i = 0; i < n; i++) {
+	        candies.add(1);
+	    }
+
+	    // Forward pass: 
+	    // Ensure that every child with a higher rating than the previous child
+	    // gets more candies than that previous child
+	    for (int i = 1; i < n; i++) {
+	        if (ratings.get(i) > ratings.get(i - 1)) {
+	            candies.set(i, candies.get(i - 1) + 1);
+	        }
+	    }
+
+	    // Backward pass:
+	    // Ensure that every child with a higher rating than the next child
+	    // gets more candies than that next child
+	    // Use Math.max to keep the larger candy count between forward and backward passes
+	    for (int i = n - 2; i >= 0; i--) {
+	        if (ratings.get(i) > ratings.get(i + 1)) {
+	            candies.set(i, Math.max(candies.get(i), candies.get(i + 1) + 1));
+	        }
+	    }
+
+	    // Calculate the total candies needed
+	    int totalCandies = 0;
+	    for (int candyCount : candies) {
+	        totalCandies += candyCount;
+	    }
+
+	    return totalCandies;
+	}
 	/*
 	problem where you need to distribute candies among a group of people based on their ratings, such that higher-rated individuals get more candies than their neighbors. 
 	The goal is to distribute the minimum number of candies while satisfying the rating constraints
@@ -61,5 +97,7 @@ public class DistributeCandy {
 		}
 		return totalCandies;
 	}
+
+
 
 }
